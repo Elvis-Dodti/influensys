@@ -17,3 +17,19 @@ class Businesses(models.Model):
     facebook = models.CharField(max_length=255)
     instagram = models.CharField(max_length=255)
     website = models.CharField(max_length=255)
+    slug = models.CharField(max_length=100, unique=True)
+
+
+EVENT_TYPE = (())
+
+
+class Events(models.Model):
+    business = models.ForeignKey(Businesses, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    objective = models.TextField()
+    event_type = models.CharField(max_length=255)
+    date = models.DateField()
+    time = models.TimeField()
+    duration = models.DurationField()
+    location = models.CharField(max_length=255)

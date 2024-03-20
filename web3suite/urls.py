@@ -31,6 +31,7 @@ urlpatterns = [
     path('auth/login/', LoginView.as_view(), name='login'),
     path('auth/logout/', LogoutView.as_view(), name='logout'),
     path('auth/registration/', RegisterView.as_view(), name='register'),
-    path('api/interface/', include('influensys.api.urls')),
+    path('api/interface-influence/', include('influensys.api.urls')),
+    path('api/interface-buisness/', include('buisness.api.urls')),
     re_path(r"^(?!media).*$", front, name="entry-point"),
 ]
