@@ -15,8 +15,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from dj_rest_auth.jwt_auth import get_refresh_view
+from dj_rest_auth.registration.views import RegisterView, VerifyEmailView
+from dj_rest_auth.views import LoginView, LogoutView, PasswordResetView, \
+    PasswordResetConfirmView
+
+from interface.api.views import front, arview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('auth/refresh/', get_refresh_view().as_view(), name='token_refresh'),
+    path('auth/login/', LoginView.as_view(), name='login'),
+    path('auth/logout/', LogoutView.as_view(), name='logout'),
+    path('auth/registration/', RegisterView.as_view(), name='register'),
+    path('api/interface/', include('influensys.api.urls')),
+    re_path(r"^(?!media).*$", front, name="entry-point"),
 ]
