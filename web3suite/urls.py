@@ -23,7 +23,6 @@ from dj_rest_auth.registration.views import RegisterView, VerifyEmailView
 from dj_rest_auth.views import LoginView, LogoutView, PasswordResetView, \
     PasswordResetConfirmView
 
-from interface.api.views import front, arview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,5 +32,4 @@ urlpatterns = [
     path('auth/registration/', RegisterView.as_view(), name='register'),
     path('api/interface-influence/', include('influensys.api.urls')),
     path('api/interface-buisness/', include('buisness.api.urls')),
-    re_path(r"^(?!media).*$", front, name="entry-point"),
 ]

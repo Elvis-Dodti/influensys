@@ -15,7 +15,7 @@ class Influencers(models.Model):
     address = models.CharField(max_length=255)
     country = models.CharField(max_length=255)
     pincode = models.CharField(max_length=255)
-    annual_revenue = models.DecimalField(max_digits=2)
+    annual_revenue = models.FloatField()
     facebook = models.CharField(max_length=255)
     instagram = models.CharField(max_length=255)
     website = models.CharField(max_length=255)
