@@ -33,3 +33,15 @@ class Events(models.Model):
     time = models.TimeField()
     duration = models.DurationField()
     location = models.CharField(max_length=255)
+
+
+class Campaigns(models.Model):
+    buisness = models.ForeignKey(Businesses, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    objective = models.TextField()
+    channel_section = models.CharField(max_length=255)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    duration = models.DurationField()
+    budget = models.FloatField()

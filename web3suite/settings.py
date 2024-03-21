@@ -161,7 +161,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://192.168.0.106:5173",
     "http://127.0.0.1:8000",
-    "http://localhost"
+    "http://localhost",
+    "http://localhost:3000",
+    "https://influverse.vercel.app/"
 ]
 
 REST_USE_JWT = True
