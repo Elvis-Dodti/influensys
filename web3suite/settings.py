@@ -176,8 +176,8 @@ SIMPLE_JWT = {
 
 }
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend', 'dist/assets'),
-    os.path.join(BASE_DIR, 'templates', 'static'),
-    ]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'frontend', 'dist/assets'),
+#     os.path.join(BASE_DIR, 'templates', 'static'),
+#     ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
