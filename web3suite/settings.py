@@ -182,4 +182,7 @@ SIMPLE_JWT = {
 #     os.path.join(BASE_DIR, 'templates', 'static'),
 #     ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 ACCOUNT_EMAIL_VERIFICATION = False
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = 'login'
