@@ -7,5 +7,6 @@ urlpatterns = [
     path('buisness/<int:pk>',BuisnessRUDView.as_view(), name='buisness-rud'),
     path('<str:slug>/events/create', EventCreateAPIView.as_view(), name='event-create'),
     path('<str:slug>/events/<int:pk>', EventRUDView.as_view(), name='event-rud'),
-    path('<str:slug>/events/list', EventListAPIView.as_view(), name='event-list')
+    path('<str:slug>/events/list', EventListAPIView.as_view(), name='event-list'),
+
 ]
