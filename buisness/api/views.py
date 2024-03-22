@@ -48,4 +48,4 @@ class EventListAPIView(ListAPIView):
     serializer_class = EventSerializer
 
     def get_queryset(self):
-        return Events.objects.filter(buisness__slug=self.kwargs['slug'])
+        return Events.objects.filter(business__slug=self.kwargs['slug'])
