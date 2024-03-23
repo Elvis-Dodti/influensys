@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 
 INDUSTRY_TYPES = (())
 
@@ -19,3 +20,10 @@ class Influencers(models.Model):
     facebook = models.CharField(max_length=255)
     instagram = models.CharField(max_length=255)
     website = models.CharField(max_length=255)
+
+
+class TargetInfo(models.Model):
+    influencers = models.ForeignKey(Influencers, on_delete=models.CASCADE)
+    audience_age = models.CharField(max_length=255)
+    audience_gender = ArrayField(models.CharField(max_length=255))
+

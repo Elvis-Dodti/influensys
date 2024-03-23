@@ -1,14 +1,13 @@
 from django.conf import settings
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
-
-INDUSTRY_TYPES = (())
 
 
 class Businesses(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     crn = models.CharField(max_length=255)
-    industry = models.CharField(max_length=255, choices=INDUSTRY_TYPES)
+    industry = ArrayField(models.CharField(max_length=255))
     address = models.CharField(max_length=255)
     country = models.CharField(max_length=255)
     pincode = models.CharField(max_length=255)
@@ -20,15 +19,12 @@ class Businesses(models.Model):
     slug = models.CharField(max_length=100, unique=True)
 
 
-EVENT_TYPE = (())
-
-
 class Events(models.Model):
     business = models.ForeignKey(Businesses, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField()
     objective = models.TextField()
-    event_type = models.CharField(max_length=255)
+    event_type = ArrayField(models.CharField(max_length=255))
     date = models.DateField()
     time = models.TimeField()
     duration = models.DurationField()
