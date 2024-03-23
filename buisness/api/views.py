@@ -49,3 +49,16 @@ class EventListAPIView(ListAPIView):
 
     def get_queryset(self):
         return Events.objects.filter(business__slug=self.kwargs['slug'])
+
+
+class CampaignCreateAPIView(CreateAPIView):
+    serializer_class = CampaignSerializer
+
+    def create(self, request, *args, **kwargs):
+        buisness = Businesses.objects.get(slug=self.kwargs['slug'])
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(business=buisness)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
