@@ -8,5 +8,7 @@ urlpatterns = [
     path('<str:slug>/events/create', EventCreateAPIView.as_view(), name='event-create'),
     path('<str:slug>/events/<int:pk>', EventRUDView.as_view(), name='event-rud'),
     path('<str:slug>/events/list', EventListAPIView.as_view(), name='event-list'),
+    path('<str:slug>/campaigns/create', CampaignCreateAPIView.as_view(), name='campaign-create'),
+
 
 ]
