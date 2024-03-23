@@ -1,10 +1,40 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from rest_framework import status
+from rest_framework.decorators import api_view
 from rest_framework.generics import *
 from rest_framework.response import Response
 
+from influensys.api.serializers import InfluencerSerializer
+from influensys.models import *
 from buisness.models import *
 from buisness.api.serializers import *
+
+
+@api_view(['GET'])
+def user_is(request):
+    usr = User.objects.get(username=request.user)
+    print(usr.id)
+    if Businesses.objects.filter(user=usr).exists():
+        context = {
+            'is_business': True,
+            'is_influencer': False,
+            'business': BuisnessSerializer(Businesses.objects.filter(user=usr), many=True)
+        }
+
+    elif Influencers.objects.filter(user=usr).exists():
+        context = {
+            'is_influencer': True,
+            'is_business': False,
+            'influencer': InfluencerSerializer(Influencers.objects.filter(user=usr), many=True)
+        }
+
+    else:
+        context = {
+            'is_business': False,
+            'is_influencer': False
+        }
+    return Response(context, status=status.HTTP_200_OK)
 
 
 class BuisnessCreateAPIView(CreateAPIView):

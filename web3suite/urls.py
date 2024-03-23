@@ -22,7 +22,7 @@ from dj_rest_auth.jwt_auth import get_refresh_view
 from dj_rest_auth.registration.views import RegisterView, VerifyEmailView
 from dj_rest_auth.views import LoginView, LogoutView, PasswordResetView, \
     PasswordResetConfirmView
-
+from buisness.api.views import user_is
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +30,7 @@ urlpatterns = [
     path('auth/login/', LoginView.as_view(), name='login'),
     path('auth/logout/', LogoutView.as_view(), name='logout'),
     path('auth/registration/', RegisterView.as_view(), name='register'),
+    path('user_is', user_is, name='user_is'),
     path('api/interface-influence/', include('influensys.api.urls')),
     path('api/interface-buisness/', include('buisness.api.urls')),
 ]
