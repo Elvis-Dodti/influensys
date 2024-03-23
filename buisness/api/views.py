@@ -19,14 +19,14 @@ def user_is(request):
         context = {
             'is_business': True,
             'is_influencer': False,
-            'business': BuisnessSerializer(Businesses.objects.filter(user=usr), many=True)
+            'business': BuisnessSerializer(Businesses.objects.filter(user=usr), many=True).data
         }
 
     elif Influencers.objects.filter(user=usr).exists():
         context = {
             'is_influencer': True,
             'is_business': False,
-            'influencer': InfluencerSerializer(Influencers.objects.filter(user=usr), many=True)
+            'influencer': InfluencerSerializer(Influencers.objects.filter(user=usr), many=True).data
         }
 
     else:
