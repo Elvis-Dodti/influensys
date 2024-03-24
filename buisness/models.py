@@ -33,7 +33,7 @@ class BusinessGoals(models.Model):
     address = models.TextField(blank=True, null=True)
     income_level = models.CharField(max_length=255, blank=True, null=True)
     occupation = models.CharField(max_length=255, blank=True, null=True)
-    communication_channel = models.IntegerField(blank=True, null=True)
+    communication_channel = models.CharField(max_length=255, blank=True, null=True)
     selected_interests = ArrayField(models.CharField(max_length=255))
 
     def __str__(self):
