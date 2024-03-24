@@ -41,9 +41,10 @@ class BuisnessCreateAPIView(CreateAPIView):
     serializer_class = BuisnessSerializer
 
     def create(self, request, *args, **kwargs):
+        user = User.objects.get(username=request.user)
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
+            serializer.save(user=user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
