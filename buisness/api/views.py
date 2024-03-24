@@ -60,7 +60,7 @@ class BuisnessGoalsCreateAPIView(CreateAPIView):
     serializer_class = BusinessGoalsSerializer
 
     def create(self, request, *args, **kwargs):
-        business = Businesses.objects.get(pk=self.kwargs['slug'])
+        business = Businesses.objects.get(slug=self.kwargs['slug'])
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(business=business)
