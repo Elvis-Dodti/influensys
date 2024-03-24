@@ -3,3 +3,4 @@
 .idea
 /buisness/migrations/
 req-mac.txt
+.env
