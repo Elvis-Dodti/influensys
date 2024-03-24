@@ -105,10 +105,10 @@ class CampaignCreateAPIView(CreateAPIView):
     serializer_class = CampaignSerializer
 
     def create(self, request, *args, **kwargs):
-        buisness = Businesses.objects.get(slug=self.kwargs['slug'])
+        business = Businesses.objects.get(slug=self.kwargs['slug'])
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(business=buisness)
+            serializer.save(business=business)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

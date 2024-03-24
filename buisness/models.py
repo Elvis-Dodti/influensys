@@ -53,7 +53,7 @@ class Events(models.Model):
 
 
 class Campaigns(models.Model):
-    buisness = models.ForeignKey(Businesses, on_delete=models.CASCADE)
+    business = models.ForeignKey(Businesses, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     objective = models.TextField(blank=True, null=True)
