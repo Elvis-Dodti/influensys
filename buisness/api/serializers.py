@@ -12,6 +12,28 @@ class BuisnessSerializer(serializers.ModelSerializer):
                   'annual_revenue', 'facebook', 'instagram', 'website', 'slug']
 
 
+class BusinessGoalsSerializer(serializers.ModelSerializer):
+    business = BuisnessSerializer(read_only=True)
+
+    class Meta:
+        model = BusinessGoals
+        fields = [
+            "id",
+            "business",  # ForeignKey field
+            "objectives",
+            "budget",
+            "age",
+            "kpi",
+            "country",
+            "gender",
+            "address",
+            "income_level",
+            "occupation",
+            "communication_channel",
+            "selected_interests"
+        ]
+
+
 class EventSerializer(serializers.ModelSerializer):
     business = BuisnessSerializer(read_only=True)
 
@@ -46,5 +68,18 @@ class CampaignSerializer(serializers.ModelSerializer):
             "start_date",
             "end_date",
             "duration",
-            "budget"
+            "budget",
+            "creative_asset",
+            "breakdown",
+            "target_age",
+            "target_gender",
+            "target_income_level",
+            "occupation",
+            "location",
+            "interests",
+            "communication_channel",
+            "content_formats",
+            "distribution_channels",
+            "offer_description",
+            "offer_terms"
         ]

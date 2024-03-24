@@ -132,8 +132,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ),
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    # 'PAGE_SIZE': 25,
+
 }
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -151,6 +150,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -163,12 +165,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
     "http://localhost",
     "http://localhost:3000",
-    "https://influverse.vercel.app/"
+    "https://influverse.vercel.app"
 ]
 
 REST_USE_JWT = True
 
-# SECURE_SSL_REDIRECT = True
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
@@ -178,12 +179,6 @@ SIMPLE_JWT = {
     'UPDATE_LAST_LOGIN': True,
 
 }
-
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'frontend', 'dist/assets'),
-#     os.path.join(BASE_DIR, 'templates', 'static'),
-#     ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 

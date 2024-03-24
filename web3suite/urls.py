@@ -34,3 +34,7 @@ urlpatterns = [
     path('api/interface-influence/', include('influensys.api.urls')),
     path('api/interface-buisness/', include('buisness.api.urls')),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

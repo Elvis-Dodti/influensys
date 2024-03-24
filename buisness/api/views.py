@@ -55,6 +55,25 @@ class BuisnessRUDView(RetrieveUpdateAPIView):
         return Businesses.objects.filter(pk=self.kwargs['pk'])
 
 
+class BuisnessGoalsCreateAPIView(CreateAPIView):
+    serializer_class = BusinessGoalsSerializer
+
+    def create(self, request, *args, **kwargs):
+        business = Businesses.objects.get(pk=self.kwargs['slug'])
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(business=business)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class BuisnessGoalsRUDView(RetrieveUpdateAPIView):
+    serializer_class = BusinessGoalsSerializer
+
+    def get_queryset(self):
+        return BusinessGoals.objects.filter(pk=self.kwargs['pk'])
+
+
 class EventCreateAPIView(CreateAPIView):
     serializer_class = EventSerializer
 
@@ -92,3 +111,17 @@ class CampaignCreateAPIView(CreateAPIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CampaignRUDView(RetrieveUpdateAPIView):
+    serializer_class = CampaignSerializer
+
+    def get_queryset(self):
+        return Campaigns.objects.filter(id=self.kwargs['pk'])
+
+
+class CampaignListAPIView(ListAPIView):
+    serializer_class = CampaignSerializer
+
+    def get_queryset(self):
+        return Campaigns.objects.filter(business__slug=self.kwargs['slug'])
