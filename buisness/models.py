@@ -44,7 +44,6 @@ class Events(models.Model):
     business = models.ForeignKey(Businesses, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    objective = models.TextField(blank=True, null=True)
     event_type = ArrayField(models.CharField(max_length=255), blank=True)
     start_date = models.DateField(blank=True, null=True)
     start_time = models.TimeField(blank=True, null=True)
