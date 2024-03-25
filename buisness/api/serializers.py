@@ -51,26 +51,35 @@ class BusinessGoalsSerializer(serializers.ModelSerializer):
 
 
 class EventSerializer(serializers.ModelSerializer):
-    business = BuisnessSerializer(read_only=True)
+    business = serializers.StringRelatedField(read_only=True, source='business.id')
 
     class Meta:
         model = Events
         fields = [
-            "id",
-            "business",
-            "name",
-            "description",
-            "objective",
-            "event_type",
-            "date",
-            "time",
-            "duration",
-            "location"
-        ]
+    "business",
+    "name",
+    "description",
+    "objective",
+    "event_type",
+    "start_date",
+    "start_time",
+    "end_date",
+    "end_time",
+    "duration",
+    "country",
+    "goals",
+    "target_age",
+    "target_gender",
+    "target_income",
+    "communication_channel",
+    "target_interests",
+    "occupation"
+]
+
 
 
 class CampaignSerializer(serializers.ModelSerializer):
-    business = BuisnessSerializer(read_only=True)
+    business = serializers.StringRelatedField(read_only=True, source='business.id')
 
     class Meta:
         model = Campaigns
