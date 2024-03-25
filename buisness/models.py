@@ -49,7 +49,7 @@ class Events(models.Model):
     start_time = models.TimeField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
     end_time = models.TimeField(blank=True, null=True)
-    duration = models.CharField(max_length=255, blank=True, null=True)
+    # duration = models.CharField(max_length=255, blank=True, null=True)
     country = models.CharField(max_length=255, blank=True, null=True)
     goals = models.TextField(blank=True, null=True)
     target_age = models.CharField(max_length=255, blank=True, null=True)
@@ -57,7 +57,8 @@ class Events(models.Model):
     target_income = models.CharField(max_length=255, blank=True, null=True)
     communication_channel = models.CharField(max_length=255, blank=True, null=True)
     target_interests = ArrayField(models.CharField(max_length=255))
-    occupation = models.CharField(max_length=255, blank=True, null=True)
+    target_occupation = models.CharField(max_length=255, blank=True, null=True)
+    budget = models.CharField(max_length=255, blank=True, null=True)
 
 class Campaigns(models.Model):
     business = models.ForeignKey(Businesses, on_delete=models.CASCADE)

@@ -64,7 +64,7 @@ class EventSerializer(serializers.ModelSerializer):
             "start_time",
             "end_date",
             "end_time",
-            "duration",
+            # "duration",
             "country",
             "goals",
             "target_age",
@@ -72,7 +72,7 @@ class EventSerializer(serializers.ModelSerializer):
             "target_income",
             "communication_channel",
             "target_interests",
-            "occupation"
+            "target_occupation"
         ]
 
 
