@@ -56,26 +56,24 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Events
         fields = [
-    "business",
-    "name",
-    "description",
-    "objective",
-    "event_type",
-    "start_date",
-    "start_time",
-    "end_date",
-    "end_time",
-    "duration",
-    "country",
-    "goals",
-    "target_age",
-    "target_gender",
-    "target_income",
-    "communication_channel",
-    "target_interests",
-    "occupation"
-]
-
+            "business",
+            "name",
+            "description",
+            "event_type",
+            "start_date",
+            "start_time",
+            "end_date",
+            "end_time",
+            "duration",
+            "country",
+            "goals",
+            "target_age",
+            "target_gender",
+            "target_income",
+            "communication_channel",
+            "target_interests",
+            "occupation"
+        ]
 
 
 class CampaignSerializer(serializers.ModelSerializer):
