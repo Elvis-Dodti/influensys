@@ -58,7 +58,7 @@ class Events(models.Model):
     target_income = models.CharField(max_length=255, blank=True, null=True)
     communication_channel = models.CharField(max_length=255, blank=True, null=True)
     target_interests = ArrayField(models.CharField(max_length=255))
-
+    occupation = models.CharField(max_length=255, blank=True, null=True)
 
 class Campaigns(models.Model):
     business = models.ForeignKey(Businesses, on_delete=models.CASCADE)
