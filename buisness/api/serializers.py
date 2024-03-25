@@ -29,7 +29,7 @@ class BuisnessSerializer(serializers.ModelSerializer):
 
 
 class BusinessGoalsSerializer(serializers.ModelSerializer):
-    business = BuisnessSerializer(read_only=True)
+    business = serializers.StringRelatedField(read_only=True, source='business.id')
 
     class Meta:
         model = BusinessGoals
