@@ -35,7 +35,7 @@ class BusinessGoalsSerializer(serializers.ModelSerializer):
         model = BusinessGoals
         fields = [
             "id",
-            "business",  # ForeignKey field
+            "business",
             "objectives",
             "budget",
             "age",

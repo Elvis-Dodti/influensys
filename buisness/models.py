@@ -45,11 +45,19 @@ class Events(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     objective = models.TextField(blank=True, null=True)
-    event_type = ArrayField(models.CharField(max_length=255))
-    date = models.DateField(blank=True, null=True)
-    time = models.TimeField(blank=True, null=True)
+    event_type = ArrayField(models.CharField(max_length=255), blank=True)
+    start_date = models.DateField(blank=True, null=True)
+    start_time = models.TimeField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
+    end_time = models.TimeField(blank=True, null=True)
     duration = models.CharField(max_length=255, blank=True, null=True)
-    location = models.CharField(max_length=255, blank=True, null=True)
+    country = models.CharField(max_length=255, blank=True, null=True)
+    goals = models.TextField(blank=True, null=True)
+    target_age = models.CharField(max_length=255, blank=True, null=True)
+    target_gender = models.CharField(max_length=255, blank=True, null=True)
+    target_income = models.CharField(max_length=255, blank=True, null=True)
+    communication_channel = models.CharField(max_length=255, blank=True, null=True)
+    target_interests = ArrayField(models.CharField(max_length=255))
 
 
 class Campaigns(models.Model):
@@ -75,6 +83,3 @@ class Campaigns(models.Model):
     distribution_channels = models.CharField(max_length=255, blank=True, null=True)
     offer_description = models.CharField(max_length=255, blank=True, null=True)
     offer_terms = models.CharField(max_length=255, blank=True, null=True)
-
-
-
