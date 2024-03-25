@@ -9,6 +9,7 @@ class BuisnessSerializer(serializers.ModelSerializer):
     class Meta:
         model = Businesses
         fields = [
+            "id",
             "user",
             "name",
             "crn",
