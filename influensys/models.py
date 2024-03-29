@@ -25,5 +25,7 @@ class Influencers(models.Model):
 class TargetInfo(models.Model):
     influencers = models.ForeignKey(Influencers, on_delete=models.CASCADE)
     audience_age = models.CharField(max_length=255)
-    audience_gender = ArrayField(models.CharField(max_length=255))
+    audience_gender = models.CharField(max_length=255)
+    tags = ArrayField(models.CharField(max_length=255))
+
 
