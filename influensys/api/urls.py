@@ -5,4 +5,5 @@ from influensys.api.views import *
 urlpatterns = [
     path('influencer/create', InfluencerCreateView.as_view(), name='influencer-create'),
     path('influencer/<int:pk>', InfluencerRUDView.as_view(), name='influencer-rud'),
+    path('influencer/list', InfluencerListView.as_view(), name='influencer-list')
 ]

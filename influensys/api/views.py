@@ -23,3 +23,10 @@ class InfluencerRUDView(RetrieveUpdateAPIView):
 
     def get_queryset(self):
         return Influencers.objects.filter(pk=self.kwargs['pk'])
+
+
+class InfluencerListView(ListAPIView):
+    serializer_class = InfluencerSerializer
+
+    def get_queryset(self):
+        return Influencers.objects.all()

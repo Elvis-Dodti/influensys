@@ -60,6 +60,7 @@ class Events(models.Model):
     target_occupation = models.CharField(max_length=255, blank=True, null=True)
     budget = models.CharField(max_length=255, blank=True, null=True)
 
+
 class Campaigns(models.Model):
     business = models.ForeignKey(Businesses, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, blank=True, null=True)
