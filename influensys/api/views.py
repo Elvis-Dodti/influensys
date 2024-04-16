@@ -45,9 +45,9 @@ def instagram_redirect(request):
         .format(os.environ.get('INSTAGRAM_CLIENT_ID')))
 
 
-@api_view(['POST'])
-def instagram_token_add(request, slug):
-    influencer = Influencers.objects.get(slug)
+@api_view(['GET'])
+def instagram_token_add(request):
+    influencer = Influencers.objects.get(slug=request.args.get('slug'))
     token = request.args.get('code')
     InfluencerInstagramTokens.objects.create(influencer=influencer,
                                              token=token)
