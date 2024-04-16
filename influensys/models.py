@@ -34,6 +34,7 @@ class TargetInfo(models.Model):
     communication_channel = models.CharField(max_length=255, blank=True, null=True)
     selected_interests = ArrayField(models.CharField(max_length=255))
 
+
 class InfluencerInstagramTokens(models.Model):
     influencer = models.ForeignKey(Influencers, models.CASCADE)
     token = models.CharField(max_length=1000)
