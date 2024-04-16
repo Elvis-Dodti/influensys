@@ -1,10 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework import status
+from rest_framework.decorators import api_view
 from rest_framework.generics import *
 from rest_framework.response import Response
 
 from influensys.api.serializers import *
 from influensys.models import *
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class InfluencerCreateView(CreateAPIView):
@@ -31,3 +36,15 @@ class InfluencerListView(ListAPIView):
 
     def get_queryset(self):
         return Influencers.objects.all()
+
+
+@api_view(['GET'])
+def instagram_redirect(request):
+    return redirect(
+        "https://api.instagram.com/oauth/authorize/?client_id={}&redirect_uri=https://influverse.vercel.app/&response_type=code"
+        .format(os.environ.get('INSTAGRAM_CLIENT_ID')))
+
+
+@api_view(['POST'])
+def instagram_token_add(request):
+    ...

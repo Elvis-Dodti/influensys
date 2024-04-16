@@ -1,6 +1,7 @@
 from django.conf import settings
-from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.fields import ArrayField, JSONField
 from django.db import models
+from influensys.models import *
 
 
 class Businesses(models.Model):
@@ -26,12 +27,12 @@ class BusinessGoals(models.Model):
     business = models.ForeignKey(Businesses, on_delete=models.CASCADE, related_name='business_goals')
     objectives = models.TextField(blank=True, null=True)
     budget = models.CharField(max_length=255, blank=True, null=True)
-    age = models.IntegerField(blank=True, null=True)
+    age = ArrayField(models.CharField(max_length=255), blank=True)
     kpi = models.CharField(max_length=255, blank=True, null=True)
-    country = models.CharField(max_length=255, blank=True, null=True)
+    country = JSONField(blank=True, null=True)
     gender = ArrayField(models.CharField(max_length=255), blank=True)
     address = models.TextField(blank=True, null=True)
-    income_level = models.CharField(max_length=255, blank=True, null=True)
+    income_level = ArrayField(models.CharField(max_length=255), blank=True)
     occupation = models.CharField(max_length=255, blank=True, null=True)
     communication_channel = models.CharField(max_length=255, blank=True, null=True)
     selected_interests = ArrayField(models.CharField(max_length=255))
@@ -84,3 +85,13 @@ class Campaigns(models.Model):
     distribution_channels = models.CharField(max_length=255, blank=True, null=True)
     offer_description = models.CharField(max_length=255, blank=True, null=True)
     offer_terms = models.CharField(max_length=255, blank=True, null=True)
+
+
+class CampaignInfluencers(models.Model):
+    campaign = models.ForeignKey(Campaigns, on_delete=models.CASCADE)
+    influencer = models.ForeignKey(Influencers, on_delete=models.CASCADE)
+
+
+class BuisnessNInfluencer(models.Model):
+    business = models.ForeignKey(Businesses, on_delete=models.CASCADE)
+    influencer = models.ForeignKey(Influencers, on_delete=models.CASCADE)

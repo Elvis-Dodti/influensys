@@ -9,6 +9,7 @@ class InfluencerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Influencers
         fields = [
+            "id",
             "user",
             "name",
             "description",
