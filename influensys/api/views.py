@@ -47,8 +47,8 @@ def instagram_redirect(request):
 
 @api_view(['GET'])
 def instagram_token_add(request):
-    influencer = Influencers.objects.get(slug=request.args.get('slug'))
-    token = request.args.get('code')
+    influencer = Influencers.objects.get(slug=request.GET.get('slug'))
+    token = request.GET.get('code')
     InfluencerInstagramTokens.objects.create(influencer=influencer,
                                              token=token)
     return redirect('http://localhost:3000/influencer/completeprofile/')
