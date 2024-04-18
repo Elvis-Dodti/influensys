@@ -101,6 +101,13 @@ class EventListAPIView(ListAPIView):
         return Events.objects.filter(business__slug=self.kwargs['slug'])
 
 
+class EventAllListAPIView(ListAPIView):
+    serializer_class = EventSerializer
+
+    def get_queryset(self):
+        return Events.objects.all()
+
+
 class CampaignCreateAPIView(CreateAPIView):
     serializer_class = CampaignSerializer
 
@@ -126,3 +133,11 @@ class CampaignListAPIView(ListAPIView):
 
     def get_queryset(self):
         return Campaigns.objects.filter(business__slug=self.kwargs['slug'])
+
+
+@api_view(['POST'])
+def influencer_campaign_add(request, slug, id):
+    campaign = Campaigns.objects.get(id=id)
+    influencer = Influencers.objects.get(id=request.data['influencer'])
+    CampaignInfluencers.objects.create(campaign=campaign, influencer=influencer)
+    return Response(status=status.HTTP_201_CREATED)

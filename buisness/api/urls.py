@@ -10,8 +10,10 @@ urlpatterns = [
     path('<str:slug>/events/create', EventCreateAPIView.as_view(), name='event-create'),
     path('<str:slug>/events/<int:pk>', EventRUDView.as_view(), name='event-rud'),
     path('<str:slug>/events/list', EventListAPIView.as_view(), name='event-list'),
+    path('events/list/all', EventAllListAPIView.as_view(), name='event-all-list'),
     path('<str:slug>/campaigns/create', CampaignCreateAPIView.as_view(), name='campaign-create'),
     path('<str:slug>/campaigns/<int:pk>', CampaignRUDView.as_view(), name='campaign-rud'),
     path('<str:slug>/campaigns/list', CampaignListAPIView.as_view(), name='campaign-list'),
+    path('<str:slug>/campaigns/add-influencer', influencer_campaign_add, name='influencer-campaign-add'),
 
 ]

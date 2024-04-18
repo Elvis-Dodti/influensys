@@ -6,6 +6,7 @@ from rest_framework.response import Response
 
 from influensys.api.serializers import *
 from influensys.models import *
+from buisness.models import *
 import os
 from dotenv import load_dotenv
 
@@ -52,3 +53,11 @@ def instagram_token_add(request):
     InfluencerInstagramTokens.objects.create(influencer=influencer,
                                              token=token)
     return redirect('http://localhost:3000/influencer/completeprofile/')
+
+
+@api_view(['POST'])
+def opt_event(request, slug):
+    infuencer = Influencers.objects.get(slug=slug)
+    event = Events.objects.get(id=request.data.get('event'))
+    EventInfluencer.objects.create(event=event, influencer=infuencer)
+    return Response(status=status.HTTP_200_OK)

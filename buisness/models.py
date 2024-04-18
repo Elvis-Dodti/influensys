@@ -29,7 +29,7 @@ class BusinessGoals(models.Model):
     budget = models.CharField(max_length=255, blank=True, null=True)
     age = ArrayField(models.CharField(max_length=255), blank=True, null=True)
     kpi = models.CharField(max_length=255, blank=True, null=True)
-    country = JSONField(blank=True, null=True)
+    country = models.JSONField(blank=True, null=True)
     gender = ArrayField(models.CharField(max_length=255), blank=True)
     address = models.TextField(blank=True, null=True)
     income_level = ArrayField(models.CharField(max_length=255), blank=True, null=True)
@@ -94,4 +94,9 @@ class CampaignInfluencers(models.Model):
 
 class BuisnessNInfluencer(models.Model):
     business = models.ForeignKey(Businesses, on_delete=models.CASCADE)
+    influencer = models.ForeignKey(Influencers, on_delete=models.CASCADE)
+
+
+class EventInfluencer(models.Model):
+    event = models.ForeignKey(Events, on_delete=models.CASCADE)
     influencer = models.ForeignKey(Influencers, on_delete=models.CASCADE)

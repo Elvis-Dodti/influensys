@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
-from django.contrib.postgres.fields import ArrayField, JSONField
+from django.contrib.postgres.fields import ArrayField
 
 INDUSTRY_TYPES = (())
 
@@ -27,7 +27,7 @@ class TargetInfo(models.Model):
     influencer = models.ForeignKey(Influencers, on_delete=models.CASCADE)
     objectives = models.TextField(blank=True, null=True)
     target_age = ArrayField(models.CharField(max_length=255), blank=True)
-    country = JSONField(blank=True, null=True)
+    country = models.JSONField(blank=True, null=True)
     target_gender = ArrayField(models.CharField(max_length=255), blank=True)
     target_income_level = ArrayField(models.CharField(max_length=255), blank=True)
     occupation = models.CharField(max_length=255, blank=True, null=True)

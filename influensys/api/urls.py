@@ -10,4 +10,7 @@ urlpatterns = [
     # insta
     path('influencer/insta/', instagram_token_add),
 
+    # opt event
+    path('<str:slug>/event/opt-in', opt_event, name='opt-in'),
+
 ]
