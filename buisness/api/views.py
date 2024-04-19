@@ -137,7 +137,8 @@ class CampaignListAPIView(ListAPIView):
 
 @api_view(['POST'])
 def influencer_campaign_add(request, slug, id):
+    business = Businesses.objects.get(slug=slug)
     campaign = Campaigns.objects.get(id=id)
     influencer = Influencers.objects.get(id=request.data['influencer'])
-    CampaignInfluencers.objects.create(campaign=campaign, influencer=influencer)
+    CampaignInfluencers.objects.create(campaign=campaign, influencer=influencer, business=business)
     return Response(status=status.HTTP_201_CREATED)

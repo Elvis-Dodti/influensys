@@ -88,6 +88,7 @@ class Campaigns(models.Model):
 
 
 class CampaignInfluencers(models.Model):
+    business = models.ForeignKey(Businesses, on_delete=models.CASCADE)
     campaign = models.ForeignKey(Campaigns, on_delete=models.CASCADE)
     influencer = models.ForeignKey(Influencers, on_delete=models.CASCADE)
 
