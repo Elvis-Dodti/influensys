@@ -104,3 +104,9 @@ def accept_campaign(request, slug, campaign_id):
     campaign_opt.save()
     return Response(status=status.HTTP_200_OK)
 
+
+class CampaignOptRUD(RetrieveUpdateDestroyAPIView):
+    serializer_class = CampaignInfluencerSerializer
+
+    def get_queryset(self):
+        return CampaignInfluencers.objects.filter(id=self.kwargs['pk'])

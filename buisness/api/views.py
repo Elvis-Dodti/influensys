@@ -150,6 +150,14 @@ def influencer_campaign_add(request, slug, id):
     return Response(status=status.HTTP_201_CREATED)
 
 
+class EventOptRUD(RetrieveUpdateDestroyAPIView):
+    serializer_class = EventOptinSerializer
+
+    def get_queryset(self):
+        return EventInfluencer.objects.filter(id=self.kwargs['pk'])
+
+
+
 class EventOptList(ListAPIView):
     serializer_class = EventOptinSerializer
 

@@ -12,6 +12,7 @@ urlpatterns = [
     path('<str:slug>/events/list', EventListAPIView.as_view(), name='event-list'),
     path('events/list/all', EventAllListAPIView.as_view(), name='event-all-list'),
     path('<str:slug>/events/status-info/list/', EventAllListAPIView.as_view(), name='event-all-list'),
+    path('<str:slug>/events/status-info/<int:pk>/', EventOptRUD.as_view(), name='event-opt-rud'),
     path('<str:slug>/events/status-info/<int:event_id>/<int:influencer_id>/', accept_influencer_event, name='event-accept-influencer'),
     path('<str:slug>/campaign/status-info/list/', CampaignStatusLists.as_view(), name='campaign-opt-status'),
     path('<str:slug>/campaigns/create', CampaignCreateAPIView.as_view(), name='campaign-create'),
