@@ -17,7 +17,7 @@ urlpatterns = [
     path('<str:slug>/events/opt-in/list', EventOptListInfluencer.as_view(), name='opt-in-list'),
 
     # campaign
-    path('<str:slug>/campaign/status-info/list/', CampaignStatusListsInfluencer.as_view(), name='campaign-status'),
+    path('<str:slug>/campaign/status-info-influencer/list/', CampaignStatusListsInfluencer.as_view(), name='campaign-status'),
     path('<str:slug>/campaign/status-info/<int:pk>/', CampaignOptRUD.as_view(), name='campaign-opt-rud'),
     path('<str:slug>/campaign-confirm/<int:campaign_id>/', accept_campaign),
 
