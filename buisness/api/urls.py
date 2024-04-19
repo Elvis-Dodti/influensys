@@ -14,6 +14,6 @@ urlpatterns = [
     path('<str:slug>/campaigns/create', CampaignCreateAPIView.as_view(), name='campaign-create'),
     path('<str:slug>/campaigns/<int:pk>', CampaignRUDView.as_view(), name='campaign-rud'),
     path('<str:slug>/campaigns/list', CampaignListAPIView.as_view(), name='campaign-list'),
-    path('<str:slug>/campaigns/add-influencer', influencer_campaign_add, name='influencer-campaign-add'),
+    path('<str:slug>/campaigns/<int:id>/add-influencer', influencer_campaign_add, name='influencer-campaign-add'),
 
 ]
