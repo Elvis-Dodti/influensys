@@ -100,3 +100,4 @@ class BuisnessNInfluencer(models.Model):
 class EventInfluencer(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE)
     influencer = models.ForeignKey(Influencers, on_delete=models.CASCADE)
+    confirmed = models.BooleanField(default=False)
