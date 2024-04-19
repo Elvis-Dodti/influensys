@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from influensys.models import *
+from buisness.models import *
 
 
 class InfluencerSerializer(serializers.ModelSerializer):
@@ -42,3 +43,9 @@ class TargetInfoSerializer(serializers.ModelSerializer):
             "selected_interests"
         ]
         read_only_fields = ["influencer"]
+
+
+class EventOptinSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EventInfluencer
+        fields = '__all__'

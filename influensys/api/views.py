@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.decorators import api_view
 from rest_framework.generics import *
 from rest_framework.response import Response
 
+from buisness.api.serializers import *
 from influensys.api.serializers import *
 from influensys.models import *
 from buisness.models import *
@@ -38,6 +39,7 @@ class InfluencerListView(ListAPIView):
     def get_queryset(self):
         return Influencers.objects.all()
 
+
 class InfluencerTargetCreate(CreateAPIView):
     serializer_class = TargetInfoSerializer
 
@@ -49,11 +51,13 @@ class InfluencerTargetCreate(CreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class InfluencerTargetRUD(RetrieveUpdateDestroyAPIView):
     serializer_class = TargetInfoSerializer
 
     def get_queryset(self):
         return TargetInfo.objects.filter(id=self.kwargs['pk'])
+
 
 @api_view(['GET'])
 def instagram_redirect(request):
@@ -77,3 +81,26 @@ def opt_event(request, slug):
     event = Events.objects.get(id=request.data.get('event'))
     EventInfluencer.objects.create(event=event, influencer=infuencer)
     return Response(status=status.HTTP_200_OK)
+
+
+class CampaignStatusListsInfluencer(ListAPIView):
+    serializer_class = CampaignInfluencerSerializer
+
+    def get_queryset(self):
+        return CampaignInfluencers.objects.filter(influencer__slug=self.kwargs['slug'])
+
+
+class EventOptListInfluencer(ListAPIView):
+    serializer_class = EventOptinSerializer
+
+    def get_queryset(self):
+        return EventInfluencer.objects.filter(influencer__slug=self.kwargs['slug'])
+
+
+@api_view(['POST'])
+def accept_campaign(request, slug, campaign_id):
+    campaign_opt = CampaignInfluencers.objects.get(campaign__id=campaign_id, influencer__slug=slug)
+    campaign_opt.confirmed = request.data.get('confirmed')
+    campaign_opt.save()
+    return Response(status=status.HTTP_200_OK)
+

@@ -9,7 +9,7 @@ from influensys.api.serializers import InfluencerSerializer
 from influensys.models import *
 from buisness.models import *
 from buisness.api.serializers import *
-
+from influensys.api.serializers import *
 
 @api_view(['GET'])
 def user_is(request):
@@ -108,6 +108,12 @@ class EventAllListAPIView(ListAPIView):
         return Events.objects.all()
 
 
+class CampaignStatusLists(ListAPIView):
+    serializer_class = CampaignInfluencerSerializer
+
+    def get_queryset(self):
+        return CampaignInfluencers.objects.filter(buisness__slug=self.kwargs['slug'])
+
 class CampaignCreateAPIView(CreateAPIView):
     serializer_class = CampaignSerializer
 
@@ -142,3 +148,18 @@ def influencer_campaign_add(request, slug, id):
     influencer = Influencers.objects.get(id=request.data['influencer'])
     CampaignInfluencers.objects.create(campaign=campaign, influencer=influencer, business=business)
     return Response(status=status.HTTP_201_CREATED)
+
+
+class EventOptList(ListAPIView):
+    serializer_class = EventOptinSerializer
+
+    def get_queryset(self):
+        return EventInfluencer.objects.filter(business__slug=self.kwargs['slug'])
+
+
+@api_view(['POST'])
+def accept_influencer_event(request, event_id, influencer_id):
+    event_opt = EventInfluencer.objects.get(event__id=event_id, influencer__id=influencer_id)
+    event_opt.confirmed = request.data.get('confirmed')
+    event_opt.save()
+    return Response(status=status.HTTP_200_OK)

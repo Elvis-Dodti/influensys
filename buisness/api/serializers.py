@@ -107,3 +107,9 @@ class CampaignSerializer(serializers.ModelSerializer):
             "offer_description",
             "offer_terms"
         ]
+
+
+class CampaignInfluencerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CampaignInfluencers
+        fields = '__all__'
