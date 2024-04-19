@@ -6,6 +6,8 @@ urlpatterns = [
     path('influencer/create', InfluencerCreateView.as_view(), name='influencer-create'),
     path('influencer/<int:pk>', InfluencerRUDView.as_view(), name='influencer-rud'),
     path('influencer/list', InfluencerListView.as_view(), name='influencer-list'),
+    path('<str:slug>/target-info/add', InfluencerTargetCreate.as_view(), name='influencer-target'),
+    path('<str:slug>/target-info/<int:pk>', InfluencerTargetRUD.as_view(), name='influencer-target-rud'),
 
     # insta
     path('influencer/insta/', instagram_token_add),

@@ -25,3 +25,19 @@ class InfluencerSerializer(serializers.ModelSerializer):
             "website",
             "slug"
         ]
+
+
+class TargetInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = [
+            "influencer",
+            "objectives",
+            "target_age",
+            "country",
+            "target_gender",
+            "target_income_level",
+            "occupation",
+            "communication_channel",
+            "selected_interests"
+        ]
+        read_only_fields = ["influencer"]

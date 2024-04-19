@@ -38,6 +38,22 @@ class InfluencerListView(ListAPIView):
     def get_queryset(self):
         return Influencers.objects.all()
 
+class InfluencerTargetCreate(CreateAPIView):
+    serializer_class = TargetInfoSerializer
+
+    def create(self, request, *args, **kwargs):
+        influencer = Influencers.objects.get(slug=self.kwargs['slug'])
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(influencer=influencer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class InfluencerTargetRUD(RetrieveUpdateDestroyAPIView):
+    serializer_class = TargetInfoSerializer
+
+    def get_queryset(self):
+        return TargetInfo.objects.filter(id=self.kwargs['pk'])
 
 @api_view(['GET'])
 def instagram_redirect(request):
