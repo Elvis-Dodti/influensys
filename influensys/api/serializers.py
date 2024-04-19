@@ -29,6 +29,7 @@ class InfluencerSerializer(serializers.ModelSerializer):
 
 class TargetInfoSerializer(serializers.ModelSerializer):
     class Meta:
+        model = TargetInfo
         fields = [
             "influencer",
             "objectives",
