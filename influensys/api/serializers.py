@@ -44,15 +44,17 @@ class TargetInfoSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ["influencer"]
 
-class EventInfoSerializer(serializers.ModelSerializer):
 
+class EventInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Events
-        fields = ['id','name','description', 'start_date',
+        fields = ['id', 'name', 'description', 'start_date',
                   'country']
+
 
 class EventOptinSerializer(serializers.ModelSerializer):
     event = EventInfoSerializer(read_only=True)
+
     class Meta:
         model = EventInfluencer
         fields = ['id', 'event', 'influencer', 'confirmed']
