@@ -112,7 +112,8 @@ class CampaignStatusLists(ListAPIView):
     serializer_class = CampaignInfluencerSerializer
 
     def get_queryset(self):
-        return CampaignInfluencers.objects.filter(business__slug=self.kwargs['slug'])
+        return CampaignInfluencers.objects.filter(business__slug=self.kwargs['slug'],
+                                                  campaign__id=self.kwargs['pk'])
 
 class CampaignCreateAPIView(CreateAPIView):
     serializer_class = CampaignSerializer
@@ -162,8 +163,16 @@ class EventOptList(ListAPIView):
     serializer_class = EventOptinSerializer
 
     def get_queryset(self):
-        return EventInfluencer.objects.filter(business__slug=self.kwargs['slug'])
+        return EventInfluencer.objects.filter(business__slug=self.kwargs['slug'],
+                                              event__id=self.kwargs['pk'])
 
+class EventOptListConfirmed(ListAPIView):
+    serializer_class = EventOptinSerializer
+
+    def get_queryset(self):
+        return EventInfluencer.objects.filter(business__slug=self.kwargs['slug'],
+                                              event__id=self.kwargs['pk'],
+                                              confirmed=True)
 
 @api_view(['POST'])
 def accept_influencer_event(request, event_id, influencer_id):
