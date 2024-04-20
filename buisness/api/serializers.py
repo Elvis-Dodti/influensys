@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from buisness.models import *
 from influensys.api.serializers import *
+from influensys.api.serializers import InfluencerSerializer
 
 
 class BuisnessSerializer(serializers.ModelSerializer):
@@ -116,3 +117,11 @@ class CampaignInfluencerSerializer(serializers.ModelSerializer):
     class Meta:
         model = CampaignInfluencers
         fields = ['id', 'influencer', 'business', 'confirmed', 'campaign']
+
+
+class EventListOptSerializer(serializers.ModelSerializer):
+    influencer = InfluencerSerializer(read_only=True)
+
+    class Meta:
+        model = EventInfluencer
+        fields = ['id', 'event', 'influencer', 'confirmed']

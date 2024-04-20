@@ -84,14 +84,14 @@ def opt_event(request, slug):
 
 
 class CampaignStatusListsInfluencer(ListAPIView):
-    serializer_class = CampaignInfluencerSerializer
+    serializer_class = CampaignOptSerializer
 
     def get_queryset(self):
         return CampaignInfluencers.objects.filter(influencer__slug=self.kwargs['slug'])
 
 
 class EventOptListInfluencer(ListAPIView):
-    serializer_class = EventOptinSerializer
+    serializer_class = EventOptInSerializer
 
     def get_queryset(self):
         return EventInfluencer.objects.filter(influencer__slug=self.kwargs['slug'])
@@ -113,9 +113,8 @@ class CampaignOptRUD(RetrieveUpdateDestroyAPIView):
 
 
 class CampaignOptListConfirmed(ListAPIView):
-    serializer_class = EventOptinSerializer
+    serializer_class = CampaignOptSerializer
 
     def get_queryset(self):
-        return EventInfluencer.objects.filter(influencer__slug=self.kwargs['slug'],
-                                              confirmed=True)
-
+        return CampaignInfluencers.objects.filter(influencer__slug=self.kwargs['slug'],
+                                                  confirmed=True)
