@@ -112,7 +112,7 @@ class CampaignStatusLists(ListAPIView):
     serializer_class = CampaignInfluencerSerializer
 
     def get_queryset(self):
-        return CampaignInfluencers.objects.filter(buisness__slug=self.kwargs['slug'])
+        return CampaignInfluencers.objects.filter(business__slug=self.kwargs['slug'])
 
 class CampaignCreateAPIView(CreateAPIView):
     serializer_class = CampaignSerializer
