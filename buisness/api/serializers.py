@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from buisness.models import *
-from influensys.api.serializers import *
 
 
 class BuisnessSerializer(serializers.ModelSerializer):
@@ -25,6 +24,31 @@ class BuisnessSerializer(serializers.ModelSerializer):
             "website",
             "phone",
             "email",
+            "slug"
+        ]
+
+
+class InfluencerSerializer(serializers.ModelSerializer):
+    slug = serializers.StringRelatedField(read_only=True)
+    user = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Influencers
+        fields = [
+            "id",
+            "user",
+            "name",
+            "description",
+            "email",
+            "phone",
+            "industry",
+            "address",
+            "country",
+            "pincode",
+            "annual_revenue",
+            "facebook",
+            "instagram",
+            "website",
             "slug"
         ]
 

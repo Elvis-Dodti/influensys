@@ -5,10 +5,6 @@ from rest_framework.decorators import api_view
 from rest_framework.generics import *
 from rest_framework.response import Response
 
-from influensys.api.serializers import InfluencerSerializer
-from influensys.models import *
-from buisness.models import *
-from buisness.api.serializers import *
 from influensys.api.serializers import *
 
 
@@ -154,14 +150,14 @@ def influencer_campaign_add(request, slug, id):
 
 
 class EventOptRUD(RetrieveUpdateDestroyAPIView):
-    serializer_class = EventOptinSerializer
+    serializer_class = EventOptInSerializer
 
     def get_queryset(self):
         return EventInfluencer.objects.filter(id=self.kwargs['pk'])
 
 
 class EventOptList(ListAPIView):
-    serializer_class = EventOptinSerializer
+    serializer_class = EventOptInSerializer
 
     def get_queryset(self):
         return EventInfluencer.objects.filter(business__slug=self.kwargs['slug'],
