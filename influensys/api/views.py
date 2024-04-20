@@ -110,3 +110,12 @@ class CampaignOptRUD(RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return CampaignInfluencers.objects.filter(id=self.kwargs['pk'])
+
+
+class CampaignOptListConfirmed(ListAPIView):
+    serializer_class = EventOptinSerializer
+
+    def get_queryset(self):
+        return EventInfluencer.objects.filter(influencer__slug=self.kwargs['slug'],
+                                              confirmed=True)
+
