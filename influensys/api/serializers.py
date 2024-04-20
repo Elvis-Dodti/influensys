@@ -1,6 +1,4 @@
 from rest_framework import serializers
-
-from buisness.api.serializers import BuisnessSerializer
 from influensys.models import *
 from buisness.models import *
 from buisness.api.serializers import *

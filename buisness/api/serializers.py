@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from buisness.models import *
 from influensys.api.serializers import *
-from influensys.api.serializers import InfluencerSerializer
 
 
 class BuisnessSerializer(serializers.ModelSerializer):
