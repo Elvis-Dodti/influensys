@@ -157,7 +157,7 @@ class EventOptRUD(RetrieveUpdateDestroyAPIView):
 
 
 class EventOptList(ListAPIView):
-    serializer_class = EventOptInSerializer
+    serializer_class = EventListOptSerializer
 
     def get_queryset(self):
         return EventInfluencer.objects.filter(event__id=self.kwargs['pk'])
