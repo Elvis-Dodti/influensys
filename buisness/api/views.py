@@ -160,8 +160,7 @@ class EventOptList(ListAPIView):
     serializer_class = EventOptInSerializer
 
     def get_queryset(self):
-        return EventInfluencer.objects.filter(business__slug=self.kwargs['slug'],
-                                              event__id=self.kwargs['pk'])
+        return EventInfluencer.objects.filter(event__id=self.kwargs['pk'])
 
 
 class EventOptListConfirmed(ListAPIView):
