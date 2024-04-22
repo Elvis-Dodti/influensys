@@ -94,6 +94,7 @@ class CampaignInfluencers(models.Model):
     confirmed = models.BooleanField(default=False)
 
 
+
 class BuisnessNInfluencer(models.Model):
     business = models.ForeignKey(Businesses, on_delete=models.CASCADE)
     influencer = models.ForeignKey(Influencers, on_delete=models.CASCADE)

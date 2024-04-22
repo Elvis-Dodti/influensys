@@ -173,7 +173,7 @@ class EventOptListConfirmed(ListAPIView):
 
 
 @api_view(['POST'])
-def accept_influencer_event(request, event_id, influencer_id):
+def accept_influencer_event(request, slug, event_id, influencer_id):
     event_opt = EventInfluencer.objects.get(event__id=event_id, influencer__id=influencer_id)
     event_opt.confirmed = request.data.get('confirmed')
     event_opt.save()
