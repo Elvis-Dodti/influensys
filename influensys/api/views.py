@@ -79,7 +79,14 @@ def instagram_token_add(request):
 def opt_event(request, slug):
     infuencer = Influencers.objects.get(slug=slug)
     event = Events.objects.get(id=request.data.get('event'))
-    EventInfluencer.objects.create(event=event, influencer=infuencer)
+    if EventInfluencer.objects.filter(event=event, influencer=infuencer).exists():
+        context = {
+            'message': 'Request already sent'
+        }
+        return Response(context, status=status.HTTP_200_OK)
+    else:
+        EventInfluencer.objects.create(event=event, influencer=infuencer)
+
     return Response(status=status.HTTP_200_OK)
 
 
