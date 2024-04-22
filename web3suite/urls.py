@@ -33,6 +33,7 @@ urlpatterns = [
     path('user_is', user_is, name='user_is'),
     path('api/interface-influence/', include('influensys.api.urls')),
     path('api/interface-buisness/', include('buisness.api.urls')),
+    path('data/', include('recommender.urls'))
 ]
 
 
