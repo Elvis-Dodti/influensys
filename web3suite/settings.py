@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'influensys',
     'buisness',
-    'recommender'
 ]
 
 MIDDLEWARE = [
