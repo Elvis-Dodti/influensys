@@ -85,6 +85,7 @@ class Campaigns(models.Model):
     distribution_channels = models.CharField(max_length=255, blank=True, null=True)
     offer_description = models.CharField(max_length=255, blank=True, null=True)
     offer_terms = models.CharField(max_length=255, blank=True, null=True)
+    message = models.TextField(blank=True, null=True)
 
 
 class CampaignInfluencers(models.Model):
