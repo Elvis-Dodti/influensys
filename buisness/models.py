@@ -19,7 +19,7 @@ class Businesses(models.Model):
     website = models.CharField(max_length=255, blank=True, null=True)
     phone = models.CharField(max_length=255, blank=True, null=True)
     email = models.CharField(max_length=255, blank=True, null=True)
-    # image = models.ImageField(upload_to='media/', blank=True, null=True)
+    image = models.ImageField(upload_to='media/', blank=True, null=True)
     slug = models.CharField(max_length=100, unique=True)
 
 

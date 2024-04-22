@@ -16,6 +16,7 @@ class BuisnessSerializer(serializers.ModelSerializer):
             "industry",
             "address",
             "country",
+            "image",
             "pincode",
             "description",
             "annual_revenue",
