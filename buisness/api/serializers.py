@@ -1,3 +1,4 @@
+from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 from buisness.models import *
 
@@ -5,6 +6,7 @@ from buisness.models import *
 class BuisnessSerializer(serializers.ModelSerializer):
     slug = serializers.StringRelatedField(read_only=True)
     user = serializers.StringRelatedField(read_only=True)
+    # image = Base64ImageField(required=False)
 
     class Meta:
         model = Businesses

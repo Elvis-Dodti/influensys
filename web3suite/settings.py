@@ -22,7 +22,6 @@ mimetypes.add_type("text/glb", ".glb", True)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -50,6 +49,7 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'rest_framework',
     'rest_framework.authtoken',
+    'storages',
     'dj_rest_auth',
     'influensys',
     'buisness',
@@ -86,7 +86,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'web3suite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -101,7 +100,6 @@ DATABASES = {
 
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -145,14 +143,29 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+PUBLIC_MEDIA_LOCATION = 'media'
+MEDIA_URL = f'https://{str(os.environ.get("AWS_CUSTOM_DOMAIN"))}/{PUBLIC_MEDIA_LOCATION}/'
+DEFAULT_FILE_STORAGE = 'influensys.core.PublicMediaStorage'
+
+AWS_ACCESS_KEY_ID = str(os.environ.get('AWS_ACCESS_KEY_ID'))
+AWS_SECRET_ACCESS_KEY = str(os.environ.get('AWS_SECRET_ACCESS_KEY'))
+AWS_STORAGE_BUCKET_NAME = str(os.environ.get('AWS_CUSTOM_S3_BUCKET_NAME'))
+AWS_DEFAULT_ACL = None
+AWS_S3_CUSTOM_DOMAIN = str(os.environ.get('AWS_CUSTOM_DOMAIN'))
+AWS_S3_RN = str(os.environ.get('AWS_DEFAULT_REGION'))
+AWS_S3_ENDURL = str(os.environ.get('AWS_S3_ENDPOINT_URL'))
+AWS_S3_FILE_OVERWRITE = False
+AWS_S3_VERITY = True
+AWS_LOCATION = 'static'
+
+STATICFILES_DIRS = [
+    'static',
+]
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -170,7 +183,6 @@ CORS_ALLOWED_ORIGINS = [
 
 REST_USE_JWT = True
 
-
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(weeks=4),
@@ -181,4 +193,3 @@ SIMPLE_JWT = {
 }
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-
