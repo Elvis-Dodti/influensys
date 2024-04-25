@@ -88,11 +88,20 @@ class Campaigns(models.Model):
     message = models.TextField(blank=True, null=True)
 
 
+STATUS = (('Pending', 'Pending'),
+          ('Approved', 'Approved'),
+          ('Rejected', 'Rejected'))
+
 class CampaignInfluencers(models.Model):
     business = models.ForeignKey(Businesses, on_delete=models.CASCADE)
     campaign = models.ForeignKey(Campaigns, on_delete=models.CASCADE)
     influencer = models.ForeignKey(Influencers, on_delete=models.CASCADE)
     confirmed = models.BooleanField(default=False)
+    status = models.CharField(max_length=255, choices=STATUS, default='Pending')
+
+
+class InfluencerWork(models.Model):
+    campaign_connection = models.ForeignKey(CampaignInfluencers, on_delete=models.CASCADE)
 
 
 
@@ -104,5 +113,5 @@ class BuisnessNInfluencer(models.Model):
 class EventInfluencer(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE)
     influencer = models.ForeignKey(Influencers, on_delete=models.CASCADE)
-    confirmed = models.BooleanField(default=False) #
-    # status = models.CharField(max_length=255)
+    confirmed = models.BooleanField(default=False)
+    status = models.CharField(max_length=255, choices=STATUS, default='Pending')

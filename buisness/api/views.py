@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.generics import *
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from influensys.api.serializers import *
 
@@ -157,6 +158,13 @@ def influencer_campaign_add(request, slug, id):
     return Response(status=status.HTTP_201_CREATED)
 
 
+class CampaignInfluencersRUD(RetrieveUpdateDestroyAPIView):
+    serializer_class = CampaignInfluencerSerializer
+
+    def get_queryset(self):
+        return CampaignInfluencers.objects.filter(id=self.kwargs['pk'])
+
+
 class EventOptRUD(RetrieveUpdateDestroyAPIView):
     serializer_class = EventOptInSerializer
 
@@ -184,5 +192,12 @@ class EventOptListConfirmed(ListAPIView):
 def accept_influencer_event(request, slug, event_id, influencer_id):
     event_opt = EventInfluencer.objects.get(event__id=event_id, influencer__id=influencer_id)
     event_opt.confirmed = request.data.get('confirmed')
+    if request.data.get('confirmed'):
+        event_opt.status = 'Approved'
+    else:
+        event_opt.status = 'Rejected'
+
     event_opt.save()
     return Response(status=status.HTTP_200_OK)
+
+

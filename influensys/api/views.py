@@ -108,6 +108,11 @@ class EventOptListInfluencer(ListAPIView):
 def accept_campaign(request, slug, campaign_id):
     campaign_opt = CampaignInfluencers.objects.get(campaign__id=campaign_id, influencer__slug=slug)
     campaign_opt.confirmed = request.data.get('confirmed')
+    if request.data.get('confirmed'):
+        campaign_opt.status = 'Approved'
+    else:
+        campaign_opt.status = 'Rejected'
+
     campaign_opt.save()
     return Response(status=status.HTTP_200_OK)
 
@@ -124,4 +129,4 @@ class CampaignOptListConfirmed(ListAPIView):
 
     def get_queryset(self):
         return CampaignInfluencers.objects.filter(influencer__slug=self.kwargs['slug'],
-                                                  confirmed=True)
+                                                  status='Approved')
