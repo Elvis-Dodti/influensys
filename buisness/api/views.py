@@ -253,11 +253,11 @@ class GiftsCreateView(CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         products = Products.objects.filter(id__in=request.data.pop('products'))
-        business = Businesses.objects.get(slug=kwargs['business_slug'])
-
+        business = Businesses.objects.get(slug=self.kwargs['business_slug'])
+        influencer = Influencers.objects.get(id=request.data.pop('influencer_id'))
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(buisness=business)
+            serializer.save(buisness=business, influencer=influencer)
             gift = Gifts.objects.get(id=serializer['id'])
             gift.products.add(*products)
             gift.save()

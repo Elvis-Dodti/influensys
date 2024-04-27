@@ -114,7 +114,7 @@ class InfluencerWork(models.Model):
     video = models.URLField(blank=True, null=True)
     comments = models.TextField(blank=True, null=True)
     marketer_response = models.TextField(blank=True, null=True)
-    confirmation = models.CharField(max_length=255, choices=CONFIRMATIONS, blank=True, null=True)
+    confirmation = models.CharField(max_length=255, choices=CONFIRMATIONS,default='Pending',  blank=True, null=True)
 
 
 class EventInfluencer(models.Model):
@@ -137,6 +137,6 @@ class Gifts(models.Model):
     product = models.ManyToManyField(Products)
     influencer = models.ForeignKey(Influencers, on_delete=models.CASCADE)
     message = models.TextField(blank=True, null=True)
-    confirmation = models.CharField(max_length=255, choices=CONFIRMATIONS, blank=True, null=True)
+    confirmation = models.CharField(max_length=255, choices=CONFIRMATIONS, default='Pending', blank=True, null=True)
     amount = models.CharField(max_length=255, blank=True, null=True)
     business = models.ForeignKey(Businesses, on_delete=models.CASCADE)
