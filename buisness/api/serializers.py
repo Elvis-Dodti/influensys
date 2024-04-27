@@ -124,6 +124,7 @@ class CampaignSerializer(serializers.ModelSerializer):
             "end_date",
             "duration",
             "budget",
+            "remaining_budget",
             "creative_asset",
             "breakdown",
             "target_age",
