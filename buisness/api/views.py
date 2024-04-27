@@ -153,7 +153,8 @@ def influencer_campaign_add(request, slug, id):
         }
         return Response(context, status=status.HTTP_200_OK)
     else:
-        CampaignInfluencers.objects.create(campaign=campaign, influencer=influencer, business=business)
+        CampaignInfluencers.objects.create(campaign=campaign, influencer=influencer, business=business,
+                                           cost=request.data['cost'])
 
     return Response(status=status.HTTP_201_CREATED)
 
@@ -278,4 +279,3 @@ class GiftsListView(ListAPIView):
 def influencer_filter(request, *args, **kwargs):
     influencers = Influencers.objects.filter(industry__contains=request.data.get('query'))
     return Response(InfluencerSerializer(influencers).data, status=status)
-
