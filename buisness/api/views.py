@@ -85,7 +85,7 @@ class EventCreateAPIView(CreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class EventRUDView(RetrieveUpdateAPIView):
+class EventRUDView(RetrieveUpdateDestroyAPIView):
     serializer_class = EventSerializer
 
     def get_queryset(self):
