@@ -127,7 +127,7 @@ class CampaignCreateAPIView(CreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class CampaignRUDView(RetrieveUpdateAPIView):
+class CampaignRUDView(RetrieveUpdateDestroyAPIView):
     serializer_class = CampaignSerializer
 
     def get_queryset(self):
