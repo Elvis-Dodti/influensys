@@ -155,7 +155,7 @@ class EventListOptSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EventInfluencer
-        fields = ['id', 'event', 'influencer', 'confirmed']
+        fields = ['id', 'event', 'influencer', 'confirmed', 'status']
 
 
 class CampaignInfluencersSerailizer(serializers.ModelSerializer):
