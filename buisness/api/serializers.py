@@ -1,11 +1,14 @@
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
+from sklearn.gaussian_process.kernels import Product
+
 from buisness.models import *
 
 
 class BuisnessSerializer(serializers.ModelSerializer):
     slug = serializers.StringRelatedField(read_only=True)
     user = serializers.StringRelatedField(read_only=True)
+
     # image = Base64ImageField(required=False)
 
     class Meta:
@@ -133,7 +136,8 @@ class CampaignSerializer(serializers.ModelSerializer):
             "content_formats",
             "distribution_channels",
             "offer_description",
-            "offer_terms"
+            "offer_terms",
+            "message"
         ]
 
 
@@ -142,7 +146,7 @@ class CampaignInfluencerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CampaignInfluencers
-        fields = ['id', 'influencer', 'business', 'confirmed', 'campaign']
+        fields = ['id', 'influencer', 'business', 'confirmed', 'campaign', 'status', 'cost']
 
 
 class EventListOptSerializer(serializers.ModelSerializer):
@@ -151,3 +155,40 @@ class EventListOptSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventInfluencer
         fields = ['id', 'event', 'influencer', 'confirmed']
+
+
+class CampaignInfluencersSerailizer(serializers.ModelSerializer):
+    influencer = InfluencerSerializer(read_only=True)
+    business = BuisnessSerializer(read_only=True)
+
+    class Meta:
+        model = CampaignInfluencers
+        fields = ['id', 'business', 'campaign', 'influencer', 'confirmed',
+                  'status', 'cost']
+
+
+class InfluencerWorkSerializer(serializers.ModelSerializer):
+    campaign = CampaignSerializer(read_only=True)
+    influencer = InfluencerSerializer(read_only=True)
+
+    class Meta:
+        model = InfluencerWork
+        fields = ['id', 'campaign', 'influencer', 'video', 'marketer_response', 'confirmation']
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    business = BuisnessSerializer(read_only=True)
+
+    class Meta:
+        model = Products
+        fields = ['id', 'image', 'specification', 'price', 'business']
+
+
+class GiftSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True, many=True)
+    influencer = InfluencerSerializer(read_only=True)
+
+    class Meta:
+        model = Gifts
+        fields = ['id', 'product', 'influencer', 'message', 'confirmation',
+                  'amount']

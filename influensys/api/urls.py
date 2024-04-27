@@ -21,4 +21,8 @@ urlpatterns = [
     path('<str:slug>/campaign/status-info/<int:pk>/', CampaignOptRUD.as_view(), name='campaign-opt-rud'),
     path('<str:slug>/campaign-confirm/<int:campaign_id>/', accept_campaign),
     path('<str:slug>/campaign/status-info-confirmed/list/', CampaignOptListConfirmed.as_view(), name='campaign'),
+    path('<str:slug>/campaign-work/campaign/<int:pk>/', CampaignWorkCreate.as_view(), name='campaign-work-create'),
+    path('<str:slug>/campaign-work/<int:pk>/',CampaignWorkRUD.as_view(), name='campaign-work-rud'),
+    path('<str:slug>/gifts/list', InfluencerGifts.as_view(), name='influencer-gift'),
+    path('<str:slug>/gifts/accept/<int:gift_id>', confirm_gift, name='confirm-gift')
 ]

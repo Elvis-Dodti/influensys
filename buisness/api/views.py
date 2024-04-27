@@ -201,3 +201,81 @@ def accept_influencer_event(request, slug, event_id, influencer_id):
     return Response(status=status.HTTP_200_OK)
 
 
+class CampaignWorkRUD(RetrieveUpdateDestroyAPIView):
+    serializer_class = InfluencerWorkSerializer
+
+    def get_queryset(self):
+        return InfluencerWork.objects.get(id=self.kwargs['pk'])
+
+
+@api_view(['POST'])
+def accept_influencer_work(request, slug, influencer_work_id):
+    work = InfluencerWork.objects.get(id=influencer_work_id)
+    if request.data.get('confirmed'):
+        work.confirmation = 'Approved'
+    else:
+        work.confirmation = 'Rejected'
+        work.comments = ''
+        work.video = ''
+        work.save()
+
+    return Response(status=status.HTTP_200_OK)
+
+
+class ProductCreateView(CreateAPIView):
+    serializer_class = ProductSerializer
+
+    def create(self, request, *args, **kwargs):
+        business = Businesses.objects.get(slug=kwargs['business_slug'])
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(buisness=business)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ProductsRUD(RetrieveUpdateDestroyAPIView):
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        return Products.objects.filter(id=self.kwargs['pk'])
+
+
+class ProductsList(ListAPIView):
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        return Products.objects.filter(business__slug=self.kwargs['slug'])
+
+
+class GiftsCreateView(CreateAPIView):
+    serializer_class = GiftSerializer
+
+    def create(self, request, *args, **kwargs):
+        products = Products.objects.filter(id__in=request.data.pop('products'))
+        business = Businesses.objects.get(slug=kwargs['business_slug'])
+
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(buisness=business)
+            gift = Gifts.objects.get(id=serializer['id'])
+            gift.products.add(*products)
+            gift.save()
+
+            return Response(self.get_serializer(gift).data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GiftsListView(ListAPIView):
+    serializer_class = GiftSerializer
+
+    def get_queryset(self):
+        return Gifts.objects.filter(business__slug=self.kwargs['slug'])
+
+
+@api_view(['POST'])
+def influencer_filter(request, *args, **kwargs):
+    influencers = Influencers.objects.filter(industry__contains=request.data.get('query'))
+    return Response(InfluencerSerializer(influencers).data, status=status)
+

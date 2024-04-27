@@ -1,9 +1,6 @@
 from buisness.api.serializers import *
 
 
-
-
-
 class TargetInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = TargetInfo

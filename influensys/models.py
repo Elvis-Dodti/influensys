@@ -12,7 +12,7 @@ class Influencers(models.Model):
     description = models.TextField(blank=True, null=True)
     email = models.CharField(max_length=255, blank=True, null=True)
     phone = models.CharField(max_length=255, blank=True, null=True)
-    industry = ArrayField(models.CharField(max_length=255), blank=True)
+    industry = ArrayField(models.CharField(max_length=255), blank=True)   # industry based filter
     address = models.CharField(max_length=255, blank=True, null=True)
     country = models.CharField(max_length=255, blank=True, null=True)
     pincode = models.CharField(max_length=255, blank=True, null=True)

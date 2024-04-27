@@ -110,6 +110,8 @@ def accept_campaign(request, slug, campaign_id):
     campaign_opt.confirmed = request.data.get('confirmed')
     if request.data.get('confirmed'):
         campaign_opt.status = 'Approved'
+        campaign = Campaigns.objects.get(id=campaign_id)
+        campaign.remaining_budget = str(float(campaign.remaining_budget) - float(campaign_opt.cost))
     else:
         campaign_opt.status = 'Rejected'
 
@@ -130,3 +132,43 @@ class CampaignOptListConfirmed(ListAPIView):
     def get_queryset(self):
         return CampaignInfluencers.objects.filter(influencer__slug=self.kwargs['slug'],
                                                   status='Approved')
+
+
+class CampaignWorkCreate(CreateAPIView):
+    serializer_class = InfluencerWorkSerializer
+
+    def create(self, request, *args, **kwargs):
+        campaign = Campaigns.objects.get(id=self.kwargs.get('pk'))
+        influencer = Influencers.objects.get(slug=self.kwargs['slug'])
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(campaign=campaign,
+                            influencer=influencer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CampaignWorkRUD(RetrieveUpdateDestroyAPIView):
+    serializer_class = InfluencerWorkSerializer
+
+    def get_queryset(self):
+        return InfluencerWork.objects.get(id=self.kwargs['pk'])
+
+
+class InfluencerGifts(ListAPIView):
+    serializer_class = GiftSerializer
+
+    def get_queryset(self):
+        return Gifts.objects.filter(influencer__slug=self.kwargs['slug'])
+
+
+@api_view(['POST'])
+def confirm_gift(request, slug, gift_id):
+    gift = Gifts.objects.get(id=gift_id)
+    if request.data.get('confirmed'):
+        gift.confirmation = 'Confirmed'
+    else:
+        gift.confirmation = 'Rejected'
+
+    return Response(status=status.HTTP_200_OK)
