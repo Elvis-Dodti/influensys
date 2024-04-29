@@ -182,7 +182,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Products
-        fields = ['id', 'image', 'specification', 'price', 'business']
+        fields = ['id', 'name', 'image', 'specification', 'price', 'business']
 
 
 class GiftSerializer(serializers.ModelSerializer):
