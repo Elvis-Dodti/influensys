@@ -227,7 +227,7 @@ class ProductCreateView(CreateAPIView):
     serializer_class = ProductSerializer
 
     def create(self, request, *args, **kwargs):
-        business = Businesses.objects.get(slug=kwargs['business_slug'])
+        business = Businesses.objects.get(slug=self.kwargs['slug'])
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(buisness=business)
@@ -254,7 +254,7 @@ class GiftsCreateView(CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         products = Products.objects.filter(id__in=request.data.pop('products'))
-        business = Businesses.objects.get(slug=self.kwargs['business_slug'])
+        business = Businesses.objects.get(slug=self.kwargs['slug'])
         influencer = Influencers.objects.get(id=request.data.pop('influencer_id'))
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid(raise_exception=True):
