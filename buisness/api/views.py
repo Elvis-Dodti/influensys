@@ -230,7 +230,7 @@ class ProductCreateView(CreateAPIView):
         business = Businesses.objects.get(slug=self.kwargs['slug'])
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(buisness=business)
+            serializer.save(business=business)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
