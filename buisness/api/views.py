@@ -228,7 +228,7 @@ class ProductCreateView(CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         business = Businesses.objects.get(slug=self.kwargs['slug'])
-        serializer = self.serializer_class(data=request.data)
+        serializer = self.get_serializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(buisness=business)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
