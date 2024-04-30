@@ -55,7 +55,8 @@ class InfluencerSerializer(serializers.ModelSerializer):
             "facebook",
             "instagram",
             "website",
-            "slug"
+            "slug",
+             "image"
         ]
 
 

@@ -68,7 +68,7 @@ def get_data_campaigns(campaign_id):
     data = pd.merge(df, demographics, how='outer', on=['id'])
 
     cur.execute(
-        """SELECT id, target_age, target_gender, target_income_level, interests, communication_channel FROM buisness_campaigns WHERE campaign_id ={0}""".format(
+        """SELECT id, target_age, target_gender, target_income_level, interests, communication_channel FROM buisness_campaigns WHERE id ={0}""".format(
             campaign_id)
     )
     campaign = cur.fetchall()
