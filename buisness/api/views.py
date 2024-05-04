@@ -217,7 +217,7 @@ class CampaignWorkPerCampaignList(ListAPIView):
 
 
 @api_view(['POST'])
-def accept_influencer_work(request, slug, influencer_work_id):
+def accept_influencer_work(request, influencer_work_id):
     work = InfluencerWork.objects.get(id=influencer_work_id)
     if request.data.get('confirmed'):
         work.confirmation = 'Approved'
