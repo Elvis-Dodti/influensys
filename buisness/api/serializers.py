@@ -175,7 +175,7 @@ class InfluencerWorkSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = InfluencerWork
-        fields = ['id', 'campaign', 'influencer', 'video', 'marketer_response', 'confirmation']
+        fields = ['id', 'campaign', 'influencer', 'video', 'marketer_response', 'confirmation', 'comments']
 
 
 class ProductSerializer(serializers.ModelSerializer):
