@@ -92,6 +92,9 @@ class Campaigns(models.Model):
     offer_description = models.CharField(max_length=255, blank=True, null=True)
     offer_terms = models.CharField(max_length=255, blank=True, null=True)
     message = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='media/', blank=True, null=True)
+
+
 
 
 STATUS = (('Pending', 'Pending'),

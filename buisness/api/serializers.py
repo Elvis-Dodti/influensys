@@ -97,7 +97,7 @@ class EventSerializer(serializers.ModelSerializer):
             "start_time",
             "end_date",
             "end_time",
-            # "duration",
+            "image",
             "country",
             "goals",
             "target_age",
@@ -139,7 +139,8 @@ class CampaignSerializer(serializers.ModelSerializer):
             "distribution_channels",
             "offer_description",
             "offer_terms",
-            "message"
+            "message",
+            "image"
         ]
 
 
