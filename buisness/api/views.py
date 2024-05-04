@@ -209,6 +209,13 @@ class CampaignWorkRUD(RetrieveUpdateDestroyAPIView):
         return InfluencerWork.objects.filter(id=self.kwargs['pk'])
 
 
+class CampaignWorkPerCampaignList(ListAPIView):
+    serializer_class = InfluencerWorkSerializer
+
+    def get_queryset(self):
+        return InfluencerWork.objects.filter(campaign__id=self.kwargs['pk'])
+
+
 @api_view(['POST'])
 def accept_influencer_work(request, slug, influencer_work_id):
     work = InfluencerWork.objects.get(id=influencer_work_id)

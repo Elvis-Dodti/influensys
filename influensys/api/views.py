@@ -172,3 +172,10 @@ def confirm_gift(request, slug, gift_id):
         gift.confirmation = 'Rejected'
 
     return Response(status=status.HTTP_200_OK)
+
+
+class CampaignWorkListView(ListAPIView):
+    serializer_class = InfluencerWorkSerializer
+
+    def get_queryset(self):
+        return InfluencerWork.objects.filter(influencer__slug=self.kwargs['slug'])

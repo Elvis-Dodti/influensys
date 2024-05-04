@@ -22,6 +22,7 @@ urlpatterns = [
     path('<str:slug>/campaigns/<int:id>/add-influencer', influencer_campaign_add, name='influencer-campaign-add'),
     path('<str:slug>/campaigns/influencer/<int:pk>', CampaignInfluencersRUD.as_view(), name='influencer-campaign-rud'),
     path('influencer/work/<int:pk>', CampaignWorkRUD.as_view(), name='influencer-work-reply'),
+    path('influencer/campaign-work/<int:pk>', CampaignWorkPerCampaignList.as_view(), name='influencer-work-list'),
     path('influencer/work/accept/<int:influencer_work_id>', accept_influencer_work, name='influencer-work-accept'),
     path('<str:slug>/product/create', ProductCreateView.as_view(), name='product-create'),
     path('<str:slug>/product/<int:pk>', ProductsRUD.as_view(), name='products-rud'),

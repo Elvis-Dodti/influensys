@@ -95,8 +95,6 @@ class Campaigns(models.Model):
     image = models.ImageField(upload_to='media/', blank=True, null=True)
 
 
-
-
 STATUS = (('Pending', 'Pending'),
           ('Approved', 'Approved'),
           ('Rejected', 'Rejected'))
@@ -117,7 +115,7 @@ class InfluencerWork(models.Model):
     video = models.URLField(blank=True, null=True)
     comments = models.TextField(blank=True, null=True)
     marketer_response = models.TextField(blank=True, null=True)
-    confirmation = models.CharField(max_length=255, choices=CONFIRMATIONS,default='Pending',  blank=True, null=True)
+    confirmation = models.CharField(max_length=255, choices=CONFIRMATIONS, default='Pending', blank=True, null=True)
 
 
 class EventInfluencer(models.Model):
