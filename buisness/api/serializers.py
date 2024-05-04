@@ -149,7 +149,8 @@ class CampaignInfluencerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CampaignInfluencers
-        fields = ['id', 'influencer', 'business', 'confirmed', 'campaign', 'status', 'cost']
+        fields = ['id', 'influencer', 'business', 'confirmed', 'campaign', 'status', 'cost', 'transaction_id']
+
 
 
 class EventListOptSerializer(serializers.ModelSerializer):
@@ -167,7 +168,7 @@ class CampaignInfluencersSerailizer(serializers.ModelSerializer):
     class Meta:
         model = CampaignInfluencers
         fields = ['id', 'business', 'campaign', 'influencer', 'confirmed',
-                  'status', 'cost']
+                  'status', 'cost', 'transaction_id']
 
 
 class InfluencerWorkSerializer(serializers.ModelSerializer):

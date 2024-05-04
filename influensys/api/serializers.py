@@ -40,4 +40,4 @@ class CampaignOptSerializer(serializers.ModelSerializer):
     class Meta:
         model = CampaignInfluencers
         fields = ['id', 'business', 'campaign', 'influencer',
-                  'confirmed', 'status', 'cost']
+                  'confirmed', 'status', 'cost', 'transaction_id']

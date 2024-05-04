@@ -219,8 +219,11 @@ class CampaignWorkPerCampaignList(ListAPIView):
 @api_view(['POST'])
 def accept_influencer_work(request, influencer_work_id):
     work = InfluencerWork.objects.get(id=influencer_work_id)
+    transaction = CampaignInfluencers.objects.get(influencer__id=work.influencer.id,
+                                                  campaign__id=work.campaign.id)
     if request.data.get('confirmed'):
         work.confirmation = 'Approved'
+        transaction.transaction_id = request.data.get('transaction_id')
     else:
         work.confirmation = 'Rejected'
         work.comments = ''

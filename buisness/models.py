@@ -107,6 +107,7 @@ class CampaignInfluencers(models.Model):
     confirmed = models.BooleanField(default=False)
     status = models.CharField(max_length=255, choices=STATUS, default='Pending')
     cost = models.CharField(max_length=255, blank=True, null=True)
+    transaction_id = models.TextField(blank=True, null=True)
 
 
 class InfluencerWork(models.Model):
@@ -116,6 +117,7 @@ class InfluencerWork(models.Model):
     comments = models.TextField(blank=True, null=True)
     marketer_response = models.TextField(blank=True, null=True)
     confirmation = models.CharField(max_length=255, choices=CONFIRMATIONS, default='Pending', blank=True, null=True)
+
 
 
 class EventInfluencer(models.Model):
