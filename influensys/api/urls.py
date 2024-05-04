@@ -25,5 +25,8 @@ urlpatterns = [
     path('<str:slug>/campaign-work/<int:pk>/', CampaignWorkRUD.as_view(), name='campaign-work-rud'),
     path('<str:slug>/campaign-work/list/', CampaignWorkListView.as_view(), name='campaign-work-list'),
     path('<str:slug>/gifts/list', InfluencerGifts.as_view(), name='influencer-gift'),
-    path('<str:slug>/gifts/accept/<int:gift_id>', confirm_gift, name='confirm-gift')
+    path('<str:slug>/gifts/accept/<int:gift_id>', confirm_gift, name='confirm-gift'),
+
+    path('insight/add', InfluInsightCreateView.as_view(), name='insight-add'),
+    path('insight/<int:influencer_id>', InfluInsightRUDView.as_view())
 ]

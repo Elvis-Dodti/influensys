@@ -179,3 +179,22 @@ class CampaignWorkListView(ListAPIView):
 
     def get_queryset(self):
         return InfluencerWork.objects.filter(influencer__slug=self.kwargs['slug'])
+
+
+class InfluInsightCreateView(CreateAPIView):
+    serializer_class = InfluencerInsightsSerializer
+
+    def create(self, request, *args, **kwargs):
+        influencer = request.data.pop('influencer')
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(influencer=influencer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class InfluInsightRUDView(RetrieveUpdateDestroyAPIView):
+    serializer_class = InfluencerInsightsSerializer
+
+    def get_queryset(self):
+        return InfluencerInsights.objects.filter(influencer__id=self.kwargs['influencer_id'])

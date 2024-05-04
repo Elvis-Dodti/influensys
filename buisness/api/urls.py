@@ -29,7 +29,11 @@ urlpatterns = [
     path('<str:slug>/product/list', ProductsList.as_view(), name='products-list'),
     path('<str:slug>/gift/add', GiftsCreateView.as_view(), name='gift-add-influencer'),
     path('<str:slug>/gift/list', GiftsListView.as_view(), name='gift-list'),
-    path('influencers/filter', influencer_filter)
+    path('influencers/filter', influencer_filter),
+
+    path('insights/add', YouTubeCreateView.as_view()),
+    path('insights/<int:business_id>', YoutubeRUDView.as_view(), name=''),
+    path('insights/influencer/<int:influencer_id>', YoutubeInfluencerRUDView.as_view(), name='')
 
 
 

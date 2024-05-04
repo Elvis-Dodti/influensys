@@ -141,3 +141,13 @@ class Gifts(models.Model):
     confirmation = models.CharField(max_length=255, choices=CONFIRMATIONS, default='Pending', blank=True, null=True)
     amount = models.CharField(max_length=255, blank=True, null=True)
     business = models.ForeignKey(Businesses, on_delete=models.CASCADE)
+
+
+class YoutubeInsights(models.Model):
+    insight = models.JSONField(null=True, blank=True)
+    business = models.ForeignKey(Businesses, on_delete=models.CASCADE)
+
+
+class InfluencerInsights(models.Model):
+    insight = models.JSONField(null=True, blank=True)
+    influencer = models.ForeignKey(Influencers, on_delete=models.CASCADE)

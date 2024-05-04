@@ -286,3 +286,29 @@ class GiftsListView(ListAPIView):
 def influencer_filter(request, *args, **kwargs):
     influencers = Influencers.objects.filter(industry__contains=request.data.get('query'))
     return Response(InfluencerSerializer(influencers).data, status=status)
+
+
+class YouTubeCreateView(CreateAPIView):
+    serializer_class = YoutubeInsightsSerializer
+
+    def create(self, request, *args, **kwargs):
+        business = request.data.pop('business')
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(business=business)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class YoutubeRUDView(RetrieveUpdateDestroyAPIView):
+    serializer_class = YoutubeInsightsSerializer
+
+    def get_queryset(self):
+        return YoutubeInsights.objects.filter(buisness__id=self.kwargs['business_id'])
+
+
+class YoutubeInfluencerRUDView(RetrieveUpdateDestroyAPIView):
+    serializer_class = InfluencerInsightsSerializer
+
+    def get_queryset(self):
+        return InfluencerInsights.objects.filter(influencer__id=self.kwargs['pk'])

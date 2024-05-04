@@ -56,7 +56,7 @@ class InfluencerSerializer(serializers.ModelSerializer):
             "instagram",
             "website",
             "slug",
-             "image"
+            "image"
         ]
 
 
@@ -195,3 +195,19 @@ class GiftSerializer(serializers.ModelSerializer):
         model = Gifts
         fields = ['id', 'product', 'influencer', 'message', 'confirmation',
                   'amount']
+
+
+class YoutubeInsightsSerializer(serializers.ModelSerializer):
+    business = BuisnessSerializer(read_only=True)
+
+    class Meta:
+        model = YoutubeInsights
+        fields = '__all__'
+
+
+class InfluencerInsightsSerializer(serializers.ModelSerializer):
+    influencer = InfluencerSerializer(read_only=True)
+
+    class Meta:
+        model = InfluencerInsights
+        fields = '__all__'
