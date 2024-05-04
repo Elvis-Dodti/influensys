@@ -206,7 +206,7 @@ class CampaignWorkRUD(RetrieveUpdateDestroyAPIView):
     serializer_class = InfluencerWorkSerializer
 
     def get_queryset(self):
-        return InfluencerWork.objects.get(id=self.kwargs['pk'])
+        return InfluencerWork.objects.filter(id=self.kwargs['pk'])
 
 
 @api_view(['POST'])
