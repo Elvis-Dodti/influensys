@@ -185,7 +185,7 @@ class InfluInsightCreateView(CreateAPIView):
     serializer_class = InfluencerInsightsSerializer
 
     def create(self, request, *args, **kwargs):
-        influencer = request.data.pop('influencer')
+        influencer = Influencers.objects.get(id=request.data.pop('influencer'))
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(influencer=influencer)

@@ -295,7 +295,7 @@ class YouTubeCreateView(CreateAPIView):
     serializer_class = YoutubeInsightsSerializer
 
     def create(self, request, *args, **kwargs):
-        business = request.data.pop('business')
+        business = Businesses.objects.get(id=request.data.pop('business'))
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(business=business)
