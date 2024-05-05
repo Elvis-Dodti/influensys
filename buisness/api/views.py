@@ -220,7 +220,7 @@ class CampaignWorkPCIList(RetrieveAPIView):
 
     def get_queryset(self):
         return InfluencerWork.objects.filter(campaign__id=self.kwargs['pk'],
-                                             influencer__id=self.kwargs['influencer_id']).order_by('-id')[0]
+                                             influencer__id=self.kwargs['influencer_id']).order_by('-id')
 
 
 @api_view(['POST'])
