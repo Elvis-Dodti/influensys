@@ -173,10 +173,13 @@ class InfluencerGifts(ListAPIView):
 @api_view(['POST'])
 def confirm_gift(request, slug, gift_id):
     gift = Gifts.objects.get(id=gift_id)
+    print(gift)
     if request.data.get('confirmed'):
         gift.confirmation = 'Confirmed'
+        gift.save()
     else:
         gift.confirmation = 'Rejected'
+        gift.save()
 
     return Response(status=status.HTTP_200_OK)
 

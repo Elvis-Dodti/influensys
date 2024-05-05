@@ -232,6 +232,9 @@ def accept_influencer_work(request, influencer_work_id):
     if request.data.get('confirmed'):
         work.confirmation = 'Approved'
         transaction.transaction_id = request.data.get('transaction_id')
+        transaction.save()
+        work.save()
+
     else:
         work.confirmation = 'Rejected'
         work.comments = ''
