@@ -30,5 +30,7 @@ urlpatterns = [
          name='influencer-work-newest-list'),
 
     path('insight/add', InfluInsightCreateView.as_view(), name='insight-add'),
-    path('insight/<int:influencer_id>', InfluInsightRUDView.as_view())
+    path('insight/<int:influencer_id>', InfluInsightRUDView.as_view()),
+
+    path('<str:slug>/campaign-influencer/', CampaignInflueItemsListAPIView.as_view())
 ]
