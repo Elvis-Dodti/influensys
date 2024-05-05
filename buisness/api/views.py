@@ -141,6 +141,13 @@ class CampaignListAPIView(ListAPIView):
         return Campaigns.objects.filter(business__slug=self.kwargs['slug'])
 
 
+class CampaignInfluencersItemsListAPIView(ListAPIView):
+    serializer_class = CampaignInfluencersSerailizer
+
+    def get_queryset(self):
+        return CampaignInfluencers.objects.filter(business__slug=self.kwargs['slug'])
+
+
 @api_view(['POST'])
 def influencer_campaign_add(request, slug, id):
     business = Businesses.objects.get(slug=slug)
@@ -215,12 +222,13 @@ class CampaignWorkPerCampaignList(ListAPIView):
     def get_queryset(self):
         return InfluencerWork.objects.filter(campaign__id=self.kwargs['pk'])
 
+
 class CampaignWorkPCIList(ListAPIView):
     serializer_class = InfluencerWorkSerializer
 
     def get_queryset(self):
         val = InfluencerWork.objects.filter(campaign__id=self.kwargs['pk'],
-                                             influencer__id=self.kwargs['influencer_id']).order_by('-id')
+                                            influencer__id=self.kwargs['influencer_id']).order_by('-id')
         return val[:1]
 
 

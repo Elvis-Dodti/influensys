@@ -35,7 +35,9 @@ urlpatterns = [
 
     path('insights/add', YouTubeCreateView.as_view()),
     path('insights/<int:business_id>', YoutubeRUDView.as_view(), name=''),
-    path('insights/influencer/<int:influencer_id>', YoutubeInfluencerRUDView.as_view(), name='')
+    path('insights/influencer/<int:influencer_id>', YoutubeInfluencerRUDView.as_view(), name=''),
+
+    path('<str:slug>/campaign-influencer/', CampaignInfluencersItemsListAPIView.as_view(), name='campaign-influncer-list')
 
 
 
