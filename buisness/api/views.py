@@ -269,7 +269,7 @@ class GiftsCreateView(CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(business=business, influencer=influencer)
-            gift = Gifts.objects.get(id=serializer['id'])
+            gift = Gifts.objects.get(id=serializer.data['id'])
             gift.products.add(*products)
             gift.save()
 

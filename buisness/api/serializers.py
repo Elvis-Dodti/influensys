@@ -152,7 +152,6 @@ class CampaignInfluencerSerializer(serializers.ModelSerializer):
         fields = ['id', 'influencer', 'business', 'confirmed', 'campaign', 'status', 'cost', 'transaction_id']
 
 
-
 class EventListOptSerializer(serializers.ModelSerializer):
     influencer = InfluencerSerializer(read_only=True)
 
