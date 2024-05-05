@@ -155,6 +155,13 @@ class CampaignWorkRUD(RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return InfluencerWork.objects.get(id=self.kwargs['pk'])
 
+class CampaignWorkPCInfluencerList(ListAPIView):
+    serializer_class = InfluencerWorkSerializer
+
+    def get_queryset(self):
+        val = InfluencerWork.objects.filter(campaign__id=self.kwargs['pk'],
+                                             influencer__id=self.kwargs['influencer_id']).order_by('-id')
+        return val[:1]
 
 class InfluencerGifts(ListAPIView):
     serializer_class = GiftSerializer
