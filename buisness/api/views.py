@@ -215,12 +215,13 @@ class CampaignWorkPerCampaignList(ListAPIView):
     def get_queryset(self):
         return InfluencerWork.objects.filter(campaign__id=self.kwargs['pk'])
 
-class CampaignWorkPCIList(RetrieveAPIView):
+class CampaignWorkPCIList(ListAPIView):
     serializer_class = InfluencerWorkSerializer
 
     def get_queryset(self):
-        return InfluencerWork.objects.filter(campaign__id=self.kwargs['pk'],
-                                             influencer__id=self.kwargs['influencer_id']).order_by('-id')[:1]
+        val = InfluencerWork.objects.filter(campaign__id=self.kwargs['pk'],
+                                             influencer__id=self.kwargs['influencer_id']).order_by('-id')
+        return val[:1]
 
 
 @api_view(['POST'])
